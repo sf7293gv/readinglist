@@ -17,6 +17,8 @@ class Book:
 
         self.bookstore = BookStore()
 
+    """ This funtion will add or update a book in the bookstore class depinding on the existence of its ID in the class... 
+    If the ID already exists, update the book. If it does not, add the book """
 
     def save(self):
         if self.id:
