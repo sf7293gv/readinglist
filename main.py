@@ -1,6 +1,8 @@
 """ Program to create and manage a list of books that the user wishes to read, and books that the user has read. """
 
+
 from bookstore import Book, BookStore, BookError
+from sqlite3.dbapi2 import Error, IntegrityError
 from menu import Menu
 import ui
 
@@ -32,9 +34,14 @@ def create_menu():
     return menu
 
 
-def add_book():
+def add_book(): 
     new_book = ui.get_book_info()
-    new_book.save()
+    try: # Added a try and except block to prevent the code from crashing if user tries to add a book with an already existing title and author names.
+        new_book.save()
+        
+    except BookError: # if program raises this error, catch it and print this:
+        print('\nA book with same tile by the same author already exists.\n')
+
     
 
 def show_read_books():
