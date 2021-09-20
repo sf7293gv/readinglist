@@ -68,15 +68,18 @@ def search_book():
 def change_read():
 
     book_id = ui.get_book_id()
-    book = store.get_book_by_id(book_id)  
-    new_read = ui.get_read_value()     
-    book.read = new_read 
-    if book.read:
-        # If the read status is read, print this:
-        print(f'\nYou have read {book.title} by {book.author}\n')
-    else: # If the read status is not read, print this:
-        print(f'\nYou have not read {book.title} by {book.author}\n')
-    book.save()
+    book = store.get_book_by_id(book_id)
+    if book is not None:
+        new_read = ui.get_read_value()
+        book.read = new_read
+        if book.read:
+            # If the read status is read, print this:
+            print(f'\nYou have read {book.title} by {book.author}\n')
+        else: # If the read status is not read, print this:
+            print(f'\nYou have not read {book.title} by {book.author}\n')
+        book.save()
+    else:
+        print('\nError: Book Not Found\n')
 
 
 def delete_book():
